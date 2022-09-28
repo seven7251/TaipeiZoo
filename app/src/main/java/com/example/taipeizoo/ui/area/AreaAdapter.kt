@@ -10,7 +10,7 @@ import com.example.taipeizoo.R
 import com.example.taipeizoo.ui.model.AreaInfo
 import com.squareup.picasso.Picasso
 
-class AreaAdapter(var areaInfoList: ArrayList<AreaInfo>, private val listener: Listener) :
+class AreaAdapter(var areaInfoList: ArrayList<AreaInfo>, private val listener: AreaPresenter.View) :
     RecyclerView.Adapter<AreaAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AreaAdapter.ViewHolder {
@@ -32,17 +32,12 @@ class AreaAdapter(var areaInfoList: ArrayList<AreaInfo>, private val listener: L
         val img: ImageView = view.findViewById(R.id.area_img)
         val info: TextView = view.findViewById(R.id.area_info)
 
-        fun bind(areaInfo: AreaInfo, listener: Listener) {
+        fun bind(areaInfo: AreaInfo, listener: AreaPresenter.View) {
             info.text = areaInfo.e_name
-            Picasso.get().load(areaInfo.e_pic_url)
-                .into(img)
+            Picasso.get().load(areaInfo.e_pic_url).into(img)
             itemView.setOnClickListener {
-                listener.onClickItem(areaInfo)
+                listener.onItemClick(areaInfo)
             }
         }
-    }
-
-    interface Listener {
-        fun onClickItem(areaInfo: AreaInfo)
     }
 }

@@ -2,9 +2,11 @@ package com.example.taipeizoo.ui.area
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.taipeizoo.R
@@ -16,12 +18,15 @@ class AreaFragment : Fragment(), AreaPresenter.View {
     private var presenter = AreaPresenter()
     private var areaInfoList: MutableList<AreaInfo>? = ArrayList()
 
+    private lateinit var progressBar:ProgressBar
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.area_fragment, container, false)
+        progressBar = view.findViewById(R.id.progressBar)
         presenter.attachView(this)
         presenter.getListFromApi()
 
@@ -44,21 +49,22 @@ class AreaFragment : Fragment(), AreaPresenter.View {
         area_recyclerview.layoutManager = LinearLayoutManager(context)
         areaAdapter = AreaAdapter(
             areaInfoList as ArrayList<AreaInfo>,
-            AreaItemListener()
+            this
         )
         area_recyclerview.adapter = areaAdapter;
     }
 
-    class AreaItemListener : AreaAdapter.Listener {
-        override fun onClickItem(areaInfo: AreaInfo) {
-        }
+    override fun onItemClick(areaInfo: AreaInfo) {
+        activity?.supportFragmentManager?.beginTransaction()
+            ?.replace(R.id.container, AreaDetailInfoFragment())
+            ?.commitNow()
     }
 
     @SuppressLint("NotifyDataSetChanged")
     override fun notifyDataSetChanged(userList: ArrayList<AreaInfo>) {
         areaAdapter.areaInfoList = userList
         areaAdapter.notifyDataSetChanged()
-//        errorContainer.visibility = View.GONE
+        progressBar.visibility = View.GONE
     }
 
     override fun showError() {

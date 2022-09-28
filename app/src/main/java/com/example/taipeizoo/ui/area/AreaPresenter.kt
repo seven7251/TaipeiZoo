@@ -15,7 +15,7 @@ class AreaPresenter : BasePresenter<AreaPresenter.View>() {
     private val apiServiceInterface = ApiService.create()
 
     fun getListFromApi() {
-        val call = apiServiceInterface.getAreaInfo()
+        val call = apiServiceInterface.getAreaResponse()
         call.enqueue(object : Callback<AreaResponse> {
             override fun onFailure(call: Call<AreaResponse>, t: Throwable) {
                 Log.d(TAG, "onFailure: " + t.message)
@@ -33,6 +33,7 @@ class AreaPresenter : BasePresenter<AreaPresenter.View>() {
     }
 
     interface View {
+        fun onItemClick(areaInfo: AreaInfo)
         fun notifyDataSetChanged(userList: ArrayList<AreaInfo>)
         fun showError()
     }

@@ -18,8 +18,10 @@ data class AreaInfo(
     val e_memo: String,
     val e_geo: String,
     val e_url: String
-
     //val _importdate : ArrayList<Importdate>
+
+//    val plantInfo: valPlantInfo,
+//    var pic_bitmap: Bitmap
 )
 
 data class AreaResult(
