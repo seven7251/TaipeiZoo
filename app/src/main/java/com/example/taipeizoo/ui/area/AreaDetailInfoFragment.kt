@@ -24,11 +24,12 @@ class AreaDetailInfoFragment : Fragment(), PlantPresenter.View {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         val view = inflater.inflate(R.layout.area_detail_fragment, container, false)
         presenter.attachView(this)
         presenter.getListFromApi()
 
-        (activity as AppCompatActivity).supportActionBar?.title = "12313123"
         return view
     }
 

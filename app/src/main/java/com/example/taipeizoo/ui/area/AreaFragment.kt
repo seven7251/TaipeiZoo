@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.taipeizoo.R
 import com.example.taipeizoo.ui.model.AreaInfo
@@ -25,6 +27,8 @@ class AreaFragment : Fragment(), AreaPresenter.View {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        (activity as AppCompatActivity).supportActionBar?.title = "Taipei Zoo"
         val view = inflater.inflate(R.layout.area_fragment, container, false)
         progressBar = view.findViewById(R.id.progressBar)
         presenter.attachView(this)
@@ -41,7 +45,6 @@ class AreaFragment : Fragment(), AreaPresenter.View {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        areaInfoList = null
         presenter.detachView()
     }
 
@@ -55,9 +58,7 @@ class AreaFragment : Fragment(), AreaPresenter.View {
     }
 
     override fun onItemClick(areaInfo: AreaInfo) {
-        activity?.supportFragmentManager?.beginTransaction()
-            ?.replace(R.id.container, AreaDetailInfoFragment())
-            ?.commitNow()
+        findNavController().navigate(R.id.action_area_fragment_to_area_detail_fragment)
     }
 
     @SuppressLint("NotifyDataSetChanged")
