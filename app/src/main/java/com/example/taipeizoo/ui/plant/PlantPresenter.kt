@@ -27,7 +27,7 @@ class PlantPresenter : BasePresenter<PlantPresenter.View>() {
                 response: Response<PlantResponse>
             ) {
                 response.body()?.result?.results?.let {
-                    view?.notifyDataSetChanged(it)
+                    view?.updateViewAndData(it)
                 }
                 Log.i(TAG, "onResponse: success")
             }
@@ -36,7 +36,7 @@ class PlantPresenter : BasePresenter<PlantPresenter.View>() {
 
     interface View {
         fun onItemClick(plantInfo: PlantInfo)
-        fun notifyDataSetChanged(userList: ArrayList<PlantInfo>)
+        fun updateViewAndData(userList: ArrayList<PlantInfo>)
         fun showError()
     }
 }

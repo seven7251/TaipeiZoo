@@ -1,6 +1,8 @@
 package com.example.taipeizoo.ui.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 /*
 data class Importdate(
@@ -9,20 +11,24 @@ data class Importdate(
     val timezone: String
 )*/
 
+@Parcelize
 data class PlantInfo(
-    val _id: Int,
+    val _id: Int = 0,
+    @SerializedName("F_AlsoKnown")
     val F_AlsoKnown: String,
     val F_Brief: String,
 //    val F_CID: String,
     val F_Code: String,
     val F_Family: String,
     val F_Feature: String,
-    @SerializedName("F_Function&Application")
-    val F_FunctionApplication: String,
+    @SerializedName("F_Function＆Application")
+    val F_FunctionApplication: String?,
     val F_Genus: String,
     val F_Geo: String,
     val F_Keywords: String,
     val F_Location: String,
+    @SerializedName("F_Name_Ch")
+    val F_Name_Ch: String,
     val F_Name_En: String,
     val F_Name_Latin: String,
 //    val F_Pic01_ALT: String,
@@ -35,7 +41,7 @@ data class PlantInfo(
 //    val F_Pic04_URL: String,
     val F_Summary: String,
     val F_Update: String,
-    val F_Vedio_URL: String,
+    val F_Vedio_URL: String
 //    val F_Voice01_ALT: String,
 //    val F_Voice01_URL: String,
 //    val F_Voice02_ALT: String,
@@ -46,9 +52,7 @@ data class PlantInfo(
 //    val F_pdf01_URL: String,
 //    val F_pdf02_ALT: String,
 //    val F_pdf02_URL: String,
-    @SerializedName("F_Name_Ch")
-    val F_Name_Ch: String
-)
+) : Parcelable
 
 data class PlantResult(
     val limit: Int,

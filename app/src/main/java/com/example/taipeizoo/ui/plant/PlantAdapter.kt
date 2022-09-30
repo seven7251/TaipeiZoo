@@ -32,14 +32,16 @@ class PlantAdapter(var plantInfoList: ArrayList<PlantInfo>, private val listener
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val img: ImageView = view.findViewById(R.id.plant_img)
         val info: TextView = view.findViewById(R.id.plant_info)
+        val name: TextView = view.findViewById(R.id.plant_name)
 
         fun bind(plantInfo: PlantInfo, listener: PlantPresenter.View) {
+            name.text = plantInfo.F_Name_Ch
             info.text = plantInfo.F_Brief
             Picasso.get().load(plantInfo.F_Pic01_URL)
                 .into(img)
-//            itemView.setOnClickListener {
-//                listener.onItemClick(plantInfo)
-//            }
+            itemView.setOnClickListener {
+                listener.onItemClick(plantInfo)
+            }
         }
     }
 }

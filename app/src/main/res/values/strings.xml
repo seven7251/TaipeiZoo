@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">TaipeiZoo</string>
+    <string name="also_know">別名</string>
+    <string name="brief_intro">簡介</string>
+    <string name="feature">特徵</string>
+    <string name="function">功能性</string>
 </resources>

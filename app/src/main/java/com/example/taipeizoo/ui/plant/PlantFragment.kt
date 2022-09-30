@@ -1,40 +1,37 @@
 package com.example.taipeizoo.ui.plant
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.taipeizoo.R
-import com.example.taipeizoo.ui.plant.PlantPresenter
 import com.example.taipeizoo.ui.model.PlantInfo
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.plant_fragment.*
 
-class PlantFragment : Fragment(), PlantPresenter.View {
-    private lateinit var plantAdapter: PlantAdapter
+class PlantFragment : Fragment() {
     private var presenter = PlantPresenter()
     private var plantInfoList: MutableList<PlantInfo>? = ArrayList()
+    lateinit var currentPlantInfo: PlantInfo
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.area_fragment, container, false)
-        presenter.attachView(this)
+        getCurrentPlantInfo()
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as AppCompatActivity).supportActionBar?.title = currentPlantInfo.F_Name_En
 
-        if (plantInfoList == null) {
-            presenter.getListFromApi()
-        }
-
+        val view = inflater.inflate(R.layout.plant_fragment, container, false)
         return view
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        //setupRecyclerView()
-
+        updateViewAndData();
     }
 
     override fun onDestroyView() {
@@ -43,32 +40,18 @@ class PlantFragment : Fragment(), PlantPresenter.View {
         presenter.detachView()
     }
 
-    override fun onItemClick(plantInfo: PlantInfo) {
-        TODO("Not yet implemented")
+    fun updateViewAndData() {
+        plant_name_ch.setText(currentPlantInfo.F_Name_Ch)
+        plant_name_en.setText(currentPlantInfo.F_Name_En)
+        plant_also_know.text = currentPlantInfo.F_AlsoKnown
+        plant_brief.setText(currentPlantInfo.F_Brief)
+        plant_feature.setText(currentPlantInfo.F_Feature)
+        plant_function.setText(currentPlantInfo.F_FunctionApplication)
+
+        Picasso.get().load(currentPlantInfo.F_Pic01_URL).into(plant_img)
     }
 
-//    private fun setupRecyclerView() {
-//        area_recyclerview.layoutManager = LinearLayoutManager(context)
-//        plantAdapter = PlantAdapter(
-//            plantInfoList as ArrayList<PlantInfo>,
-//            AreaItemListener()
-//        )
-//        area_recyclerview.adapter = areaAdapter;
-//    }
-
-//    class PlantItemListener : PlantAdapter.Listener {
-//        override fun onClickItem(plantInfo: PlantInfo) {
-//        }
-//    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    override fun notifyDataSetChanged(userList: ArrayList<PlantInfo>) {
-        plantAdapter.plantInfoList = userList
-        plantAdapter.notifyDataSetChanged()
-//        errorContainer.visibility = View.GONE
-    }
-
-    override fun showError() {
-
+    private fun getCurrentPlantInfo() {
+        currentPlantInfo = arguments?.getParcelable("plantInfo")!!
     }
 }

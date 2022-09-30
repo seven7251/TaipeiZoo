@@ -17,5 +17,14 @@
     <fragment android:id="@+id/area_detail_fragment"
         android:name="com.example.taipeizoo.ui.area.AreaDetailInfoFragment"
         android:label="area_detail_fragment"
-        tools:layout="@layout/area_detail_fragment"/>
+        tools:layout="@layout/area_detail_fragment">
+        <action
+            android:id="@+id/action_area_detail_fragment_to_plant_fragment"
+            app:destination="@id/plant_fragment" />
+    </fragment>
+
+    <fragment android:id="@+id/plant_fragment"
+        android:name="com.example.taipeizoo.ui.plant.PlantFragment"
+        android:label="l_fragment"
+        tools:layout="@layout/plant_fragment"/>
 </navigation>

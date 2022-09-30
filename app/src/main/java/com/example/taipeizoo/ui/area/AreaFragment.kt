@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -58,7 +59,8 @@ class AreaFragment : Fragment(), AreaPresenter.View {
     }
 
     override fun onItemClick(areaInfo: AreaInfo) {
-        findNavController().navigate(R.id.action_area_fragment_to_area_detail_fragment)
+        val bundle = bundleOf("areaInfo" to areaInfo)
+        findNavController().navigate(R.id.action_area_fragment_to_area_detail_fragment, bundle)
     }
 
     @SuppressLint("NotifyDataSetChanged")

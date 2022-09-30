@@ -1,5 +1,8 @@
 package com.example.taipeizoo.ui.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
 /*
 data class Importdate(
     val data: String,
@@ -7,6 +10,7 @@ data class Importdate(
     val timezone: String
 )*/
 
+@Parcelize
 data class AreaInfo(
     val _id: Int,
     val e_name: String,
@@ -22,7 +26,7 @@ data class AreaInfo(
 
 //    val plantInfo: valPlantInfo,
 //    var pic_bitmap: Bitmap
-)
+) : Parcelable
 
 data class AreaResult(
     val limit: Int,

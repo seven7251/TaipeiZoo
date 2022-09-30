@@ -30,10 +30,12 @@ class AreaAdapter(var areaInfoList: ArrayList<AreaInfo>, private val listener: A
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val img: ImageView = view.findViewById(R.id.area_img)
+        val name:TextView = view.findViewById(R.id.area_name)
         val info: TextView = view.findViewById(R.id.area_info)
 
         fun bind(areaInfo: AreaInfo, listener: AreaPresenter.View) {
-            info.text = areaInfo.e_name
+            info.text = areaInfo.e_info
+            name.text = areaInfo.e_name
             Picasso.get().load(areaInfo.e_pic_url).into(img)
             itemView.setOnClickListener {
                 listener.onItemClick(areaInfo)
