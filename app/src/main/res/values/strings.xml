@@ -4,4 +4,6 @@
     <string name="brief_intro">簡介</string>
     <string name="feature">特徵</string>
     <string name="function">功能性</string>
+
+    <string name="error_message">Error Loading</string>
 </resources>

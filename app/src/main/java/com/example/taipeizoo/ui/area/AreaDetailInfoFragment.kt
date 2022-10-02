@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -24,6 +26,8 @@ class AreaDetailInfoFragment : Fragment(), PlantPresenter.View {
     private var infoList: MutableList<PlantInfo>? = ArrayList()
     lateinit var currentAreaInfo : AreaInfo
 
+    private lateinit var progressBar: ProgressBar
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -32,7 +36,8 @@ class AreaDetailInfoFragment : Fragment(), PlantPresenter.View {
         getCurrentAreaInfo()
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         (activity as AppCompatActivity).supportActionBar?.title = currentAreaInfo.e_name
-
+        progressBar = (activity as AppCompatActivity).findViewById(R.id.progressBar)
+        progressBar.visibility = View.VISIBLE
         val view = inflater.inflate(R.layout.area_detail_fragment, container, false)
         presenter.attachView(this)
         presenter.getListFromApi()
@@ -63,10 +68,13 @@ class AreaDetailInfoFragment : Fragment(), PlantPresenter.View {
     override fun updateViewAndData(userList: ArrayList<PlantInfo>) {
         val data: AreaInfo? = arguments?.getParcelable("areaInfo")
         area_detail_info.setText(data?.e_info)
-        Picasso.get().load(data?.e_pic_url).into(area_detail_img)
+        Picasso.get().load(data?.e_pic_url).error(R.drawable.ic_area_img)
+            .into(area_detail_img)
 
         plantAdapter.plantInfoList = mappingLocation(data as AreaInfo, userList)
         plantAdapter.notifyDataSetChanged()
+
+        progressBar.visibility = View.GONE
     }
 
     private fun mappingLocation(
@@ -82,7 +90,8 @@ class AreaDetailInfoFragment : Fragment(), PlantPresenter.View {
     }
 
     override fun showError() {
-
+        Toast.makeText(activity, activity?.getText(R.string.error_message), Toast.LENGTH_LONG).show()
+        progressBar.visibility = View.GONE
     }
 
     private fun getCurrentAreaInfo() {

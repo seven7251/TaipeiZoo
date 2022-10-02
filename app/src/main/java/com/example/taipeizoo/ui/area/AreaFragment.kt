@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -21,17 +22,18 @@ class AreaFragment : Fragment(), AreaPresenter.View {
     private var presenter = AreaPresenter()
     private var areaInfoList: MutableList<AreaInfo>? = ArrayList()
 
-    private lateinit var progressBar:ProgressBar
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
         (activity as AppCompatActivity).supportActionBar?.title = "Taipei Zoo"
         val view = inflater.inflate(R.layout.area_fragment, container, false)
-        progressBar = view.findViewById(R.id.progressBar)
+        progressBar = (activity as AppCompatActivity).findViewById(R.id.progressBar)
+        progressBar.visibility = View.VISIBLE
         presenter.attachView(this)
         presenter.getListFromApi()
 
@@ -71,6 +73,7 @@ class AreaFragment : Fragment(), AreaPresenter.View {
     }
 
     override fun showError() {
-
+        Toast.makeText(activity, activity?.getText(R.string.error_message), Toast.LENGTH_LONG).show()
+        progressBar.visibility = View.GONE
     }
 }
