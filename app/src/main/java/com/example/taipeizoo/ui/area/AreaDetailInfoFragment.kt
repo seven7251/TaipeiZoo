@@ -75,6 +75,9 @@ class AreaDetailInfoFragment : Fragment(), PlantPresenter.View {
         plantAdapter.notifyDataSetChanged()
 
         progressBar.visibility = View.GONE
+        if (plantAdapter.plantInfoList.isNotEmpty()) {
+            plant_title.visibility = View.VISIBLE
+        }
     }
 
     private fun mappingLocation(

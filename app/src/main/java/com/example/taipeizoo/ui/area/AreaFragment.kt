@@ -30,14 +30,20 @@ class AreaFragment : Fragment(), AreaPresenter.View {
         savedInstanceState: Bundle?,
     ): View? {
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
-        (activity as AppCompatActivity).supportActionBar?.title = "Taipei Zoo"
+        (activity as AppCompatActivity).supportActionBar?.title = activity?.getString(R.string.app_name)
         val view = inflater.inflate(R.layout.area_fragment, container, false)
         progressBar = (activity as AppCompatActivity).findViewById(R.id.progressBar)
         progressBar.visibility = View.VISIBLE
         presenter.attachView(this)
-        presenter.getListFromApi()
 
         return view
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (areaInfoList?.isEmpty() == true) {
+            presenter.getListFromApi()
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

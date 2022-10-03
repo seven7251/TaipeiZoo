@@ -6,4 +6,6 @@
     <string name="function">功能性</string>
 
     <string name="error_message">Error Loading</string>
+    <string name="plant_title">植物資料</string>
+
 </resources>

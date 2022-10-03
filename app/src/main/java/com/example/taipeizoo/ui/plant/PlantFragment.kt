@@ -40,7 +40,7 @@ class PlantFragment : Fragment() {
         presenter.detachView()
     }
 
-    fun updateViewAndData() {
+    private fun updateViewAndData() {
         plant_name_ch.setText(currentPlantInfo.F_Name_Ch)
         plant_name_en.setText(currentPlantInfo.F_Name_En)
         plant_also_know.text = currentPlantInfo.F_AlsoKnown

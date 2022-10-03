@@ -3,9 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Project/TaipeiZoo/app/src/main/res/layout/area_detail_fragment.xml" value="0.1" />
         <entry key="..\:/Project/TaipeiZoo/app/src/main/res/layout/area_fragment.xml" value="0.16510416666666666" />
         <entry key="..\:/Project/TaipeiZoo/app/src/main/res/layout/area_item.xml" value="0.13909774436090225" />
         <entry key="..\:/Project/TaipeiZoo/app/src/main/res/layout/main_fragment.xml" value="0.36666666666666664" />
+        <entry key="..\:/Project/TaipeiZoo/app/src/main/res/layout/plant_fragment.xml" value="0.1" />
+        <entry key="..\:/Project/TaipeiZoo/app/src/main/res/layout/plant_item.xml" value="0.1" />
       </map>
     </option>
   </component>
